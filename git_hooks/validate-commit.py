@@ -45,10 +45,10 @@ def check_format_rules(lineno, line):
         return header_check(real_lineno, line)
 
     if lineno == 1 and line:
-            return "Line %d: Second line should be empty." % (real_lineno,)
+        return "Line %d: Second line should be empty." % (real_lineno,)
 
     if not line.startswith('#') and len(line) > 72:
-            return "Line %d: No line should be over 72 characters long. (is %d)" % (real_lineno,len(line))
+        return "Line %d: No line should be over 72 characters long. (is %d)" % (real_lineno,len(line))
 
     return False
 
@@ -56,6 +56,7 @@ def check_format_rules(lineno, line):
 while True:
     commit_msg = []
     errors = []
+    
     with open(message_file) as commit_fd:
         for lineno, line in enumerate(commit_fd):
             stripped_line = line.strip()
@@ -64,6 +65,7 @@ while True:
                 e = check_format_rules(lineno, stripped_line)
                 if e:
                     errors.append(e)
+
     with open(message_file, 'w') as commit_fd:
         for line in commit_msg:
             commit_fd.write(line)
@@ -75,9 +77,10 @@ while True:
             for error in errors:
                 commit_fd.write('#! %s\n' % (error,))
 
-            re_edit = raw_input('Invalid git commit message format.  Press y to edit and n to cancel the commit. [Y/n]: ')
-            if re_edit.lower() in ('n','no'):
-                sys.exit(1)
-            call('%s %s' % (editor, message_file), shell=True)
-            continue
+    if errors:
+        re_edit = raw_input('Invalid git commit message format.  Press y to edit and n to cancel the commit. [Y/n]: ')
+        if re_edit.lower() in ('n','no'):
+            sys.exit(1)
+        call('%s %s' % (editor, message_file), shell=True)
+        continue
     break
