@@ -13,7 +13,7 @@ import re
 import sys, os
 from subprocess import call
 
-valid_commit_types = ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', ]
+valid_commit_types = ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore']
 help_address = 'https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#'
 
 if os.environ.get('EDITOR') != 'none':
@@ -35,7 +35,7 @@ def header_check(real_lineno, line):
         return "Line %d: Commit type not valid. Must be one of:\n#! %s" % (real_lineno,", ".join(valid_commit_types))
 
     if len(line) > 50:
-        return "Line %d: First line should be less than 50 characters in length." % (real_lineno,)
+        return "Line %d: First line should be less than 50 characters in length. (is %d)" % (real_lineno, len(line))
 
 
 def check_format_rules(lineno, line):
@@ -48,7 +48,7 @@ def check_format_rules(lineno, line):
             return "Line %d: Second line should be empty." % (real_lineno,)
 
     if not line.startswith('#') and len(line) > 72:
-            return "Line %d: No line should be over 72 characters long." % (real_lineno,)
+            return "Line %d: No line should be over 72 characters long. (is %d)" % (real_lineno,len(line))
 
     return False
 
