@@ -64,20 +64,20 @@ while True:
                 e = check_format_rules(lineno, stripped_line)
                 if e:
                     errors.append(e)
-    if errors:
-        with open(message_file, 'w') as commit_fd:
-            for line in commit_msg:
-                commit_fd.write(line)
+    with open(message_file, 'w') as commit_fd:
+        for line in commit_msg:
+            commit_fd.write(line)
 
+        if errors:
             if commit_msg[-1] != "\n":
                 commit_fd.write('\n')
             commit_fd.write('%s\n#! %s\n' % ('#! GIT COMMIT MESSAGE FORMAT ERRORS:', help_address))
             for error in errors:
                 commit_fd.write('#! %s\n' % (error,))
 
-        re_edit = raw_input('Invalid git commit message format.  Press y to edit and n to cancel the commit. [Y/n]: ')
-        if re_edit.lower() in ('n','no'):
-            sys.exit(1)
-        call('%s %s' % (editor, message_file), shell=True)
-        continue
+            re_edit = raw_input('Invalid git commit message format.  Press y to edit and n to cancel the commit. [Y/n]: ')
+            if re_edit.lower() in ('n','no'):
+                sys.exit(1)
+            call('%s %s' % (editor, message_file), shell=True)
+            continue
     break
