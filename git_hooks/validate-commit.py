@@ -56,7 +56,7 @@ def check_format_rules(lineno, line):
 while True:
     commit_msg = []
     errors = []
-    
+
     with open(message_file) as commit_fd:
         for lineno, line in enumerate(commit_fd):
             stripped_line = line.strip()
