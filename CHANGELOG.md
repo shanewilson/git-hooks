@@ -1,3 +1,11 @@
+### 1.4.9 (2014-10-10)
+
+
+#### Bug Fixes
+
+* **build:** release fix stuff ([c1d2516d](https://github.com/shanewilson/git-hooks//commit/c1d2516d74737fef52a14b3010fe3aa438cc6d86))
+
+
 ### 1.4.8 (2014-10-10)
 
 

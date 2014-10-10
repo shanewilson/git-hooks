@@ -82,19 +82,19 @@ prepare() {
 	logs
 
 	# tag commit
-	git add CHANGELOG.md package.json -q
-	git commit -m "chore(release): Release ${RELEASE_VERSION}" -q
-	git tag -s ${RELEASE_VERSION} -m "chore(release): $RELEASE_VERSION" "$COMMIT_SHA" -q
+	git add CHANGELOG.md package.json
+	git commit -m "chore(release): Release ${RELEASE_VERSION}"
+	git tag -s ${RELEASE_VERSION} -m "chore(release): $RELEASE_VERSION" "$COMMIT_SHA"
 
 	# updates to next development version
 	updateVersion ${RELEASE_VERSION} ${NEXT_VERSION}${SNAPSHOT}
 
 	# commit new version to master
-	git add package.json -q
-	git commit -m "chore(release): Start Development on ${NEXT_VERSION}" -q
+	git add package.json
+	git commit -m "chore(release): Start Development on ${NEXT_VERSION}"
 
 	# push master and tags
-	git push origin master && git push origin $RELEASE_VERSION -q
+	git push origin master && git push origin $RELEASE_VERSION	
 }
 
 prepare
