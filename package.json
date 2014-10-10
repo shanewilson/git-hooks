@@ -1,6 +1,6 @@
 {
   "name": "git-hook-test",
-  "version": "1.4.7-beta",
+  "version": "1.4.7",
   "description": "",
   "main": "index.js",
   "scripts": {
