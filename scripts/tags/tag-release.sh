@@ -27,6 +27,7 @@ function checkVersionNumber() {
 function init {
   cd ../..
   checkVersionNumber
+  replaceJsonProp "package.json" "version" ".*" "blah"
   TAG_NAME="v$VERSION_NUMBER"
 }
 

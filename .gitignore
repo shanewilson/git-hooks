@@ -1,3 +1,2 @@
-# Created by .gitignore support plugin (hsz.mobi)
-.npm-debug.log
+npm-debug.log*
 .idea
