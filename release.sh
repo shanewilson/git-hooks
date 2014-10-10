@@ -87,7 +87,7 @@ prepare() {
 	git tag -s ${RELEASE_VERSION} -m "chore(release): $RELEASE_VERSION" "$COMMIT_SHA"
 
 	# # updates to next development version
-	updateVersion ${RELEASE_VERSION} ${NEXT_VERSION}
+	updateVersion ${RELEASE_VERSION} ${NEXT_VERSION}${SNAPSHOT}
 
 	# # commit new version to master
 	git add package.json
