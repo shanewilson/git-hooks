@@ -1,3 +1,11 @@
+### 1.4.6 (2014-10-10)
+
+
+#### Bug Fixes
+
+* **release:** auto run changelog gen ([3b8d7a7d](https://github.com/NCI-GDC/portal-ui/commit/3b8d7a7d061ce4b7fcf96fec01f4309545b24e1d))
+
+
 ### 1.4.5 (2014-10-10)
 
 
