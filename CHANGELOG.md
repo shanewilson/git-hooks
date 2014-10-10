@@ -1,6 +1,14 @@
 ### 1.4.8 (2014-10-10)
 
 
+#### Bug Fixes
+
+* **app:** fixes logs and version ([d2dd8b14](https://github.com/shanewilson/git-hooks//commit/d2dd8b14c6a3b83dad52fbd6dddc07c6aae29684))
+
+
+### 1.4.8 (2014-10-10)
+
+
 ### 1.4.7 (2014-10-10)
 
 
