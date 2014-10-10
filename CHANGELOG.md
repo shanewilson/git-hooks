@@ -76,6 +76,51 @@
 ### 1.4.7 (2014-10-10)
 
 
+#### Bug Fixes
+
+* **build:**
+  * more git dirty check fix ([c71899ef](https://github.com/shanewilson/git-hooks//commit/c71899efe2036ecf34c818fe69afe34c2e1d8674))
+  * git dirty check fix ([bd93cea4](https://github.com/shanewilson/git-hooks//commit/bd93cea4b9769f6ba4bcb6a5f4d0fc2e6e9e8012))
+
+
+#### Features
+
+* **build:** pulls out some bash stuff to utils ([bbb03173](https://github.com/shanewilson/git-hooks//commit/bbb031730081e41ff473589f488df8798dbc544c))
+
+
+### 1.4.7 (2014-10-10)
+
+
+#### Bug Fixes
+
+* **build:**
+  * more git dirty check fix ([c71899ef](https://github.com/shanewilson/git-hooks//commit/c71899efe2036ecf34c818fe69afe34c2e1d8674))
+  * git dirty check fix ([bd93cea4](https://github.com/shanewilson/git-hooks//commit/bd93cea4b9769f6ba4bcb6a5f4d0fc2e6e9e8012))
+
+
+#### Features
+
+* **build:** pulls out some bash stuff to utils ([bbb03173](https://github.com/shanewilson/git-hooks//commit/bbb031730081e41ff473589f488df8798dbc544c))
+
+
+### 1.4.7 (2014-10-10)
+
+
+#### Bug Fixes
+
+* **build:**
+  * more git dirty check fix ([c71899ef](https://github.com/shanewilson/git-hooks//commit/c71899efe2036ecf34c818fe69afe34c2e1d8674))
+  * git dirty check fix ([bd93cea4](https://github.com/shanewilson/git-hooks//commit/bd93cea4b9769f6ba4bcb6a5f4d0fc2e6e9e8012))
+
+
+#### Features
+
+* **build:** pulls out some bash stuff to utils ([bbb03173](https://github.com/shanewilson/git-hooks//commit/bbb031730081e41ff473589f488df8798dbc544c))
+
+
+### 1.4.7 (2014-10-10)
+
+
 ### 1.4.7 (2014-10-10)
 
 

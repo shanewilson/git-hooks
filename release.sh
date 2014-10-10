@@ -43,48 +43,53 @@ fi
 
 compareVersions() {
 	printf "Checking that %s is greater than %s..." $(focus ${NEXT_VERSION}) $(focus ${RELEASE_VERSION})
-	if [[ ${NEXT_VERSION} > ${RELEASE_VERSION} ]]; then
+	if [[ ${2} > ${1} ]]; then
 		echo_success
 	else
-		echo_failure "${ERR} The next version must be greater than the current version."
+		echo_failure "The next version must be greater than the current version."
 	fi
 }
 
-updateVersionToRelease() {
-	printf "Updating %s to %s in %s..." $(focus ${CURRENT_VERSION}) $(focus ${RELEASE_VERSION}) $(focus ${PACKAGE})
-	replaceJsonProp ${PACKAGE} "version" ".*" ${RELEASE_VERSION}
-	if [[ $(readJsonProp ${PACKAGE} "version") == ${RELEASE_VERSION} ]]; then
+updateVersion() {
+	local FROM=$1
+	local TO=$2
+	printf "Updating from %s to %s..." $(focus ${FROM}) $(focus ${TO})
+	replaceJsonProp ${PACKAGE} "version" ".*" ${TO}
+	if [[ $(readJsonProp ${PACKAGE} "version") == ${TO} ]]; then
 		echo_success
 	else
-		echo_failure "${ERR} An error occurred while trying to update the development version."
+		echo_failure "An error occurred while trying to update the development version."
 	fi
+}
+
+logs() {
+	npm run logs
 }
 
 prepare() {
-	gitDirty
-	echo "pass through"
-	exit
+	# gitDirty
+
 	local PACKAGE="package.json"
 	local SNAPSHOT="-beta"
 
 	local CURRENT_VERSION=$(readJsonProp ${PACKAGE} "version")
 	local RELEASE_VERSION=${CURRENT_VERSION//${SNAPSHOT}/}
 
-	compareVersions
-	updateVersionToRelease
+	compareVersions ${RELEASE_VERSION} ${NEXT_VERSION} 
+	updateVersion ${CURRENT_VERSION} ${RELEASE_VERSION}
 
 	# updates changelog
-	npm run changelog
+	logs
 
 	# tag commit
 	git add CHANGELOG.md package.json
 	git commit -m "chore(release): Release ${RELEASE_VERSION}"
 	git tag -s ${RELEASE_VERSION} -m "chore(release): $RELEASE_VERSION" "$COMMIT_SHA"
 
-	# updates to next development version
-	replaceJsonProp ${PACKAGE} "version" ".*" ${NEXT_VERSION}${SNAPSHOT}
+	# # updates to next development version
+	updateVersion ${RELEASE_VERSION} ${NEXT_VERSION}
 
-	# commit new version to master
+	# # commit new version to master
 	git add package.json
 	git commit -m "chore(release): Start Development on ${NEXT_VERSION}"
 }
