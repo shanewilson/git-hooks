@@ -1,15 +1,8 @@
-### 1.4.5-beta (2014-10-10)
+### 1.4.5 (2014-10-10)
 
 
-changelog 
+#### Features
 
-changelog 1.4.2
+* **build:** adds a gulp file ([2b880c66](https://github.com/NCI-GDC/portal-ui/commit/2b880c66585e4ffe0b95fbe9815cfec3c158b6d5), closes [GDC-1](https://jira.oicr.on.ca/browse/GDC-1), [GDC-2](https://jira.oicr.on.ca/browse/GDC-2), [GDC-3](https://jira.oicr.on.ca/browse/GDC-3))
 
-changelog 1.4.2
-
-changelog 1.4.2
-
-changelog 1.4.3
-
-changelog 1.4.4
 
