@@ -33,7 +33,7 @@ RELEASE_VERSION=${CURRENT_VERSION//${SNAPSHOT}/}
 replaceJsonProp ${PACKAGE} "version" ".*" ${RELEASE_VERSION}
 
 # updates changelog
-echo "changelog ${RELEASE_VERSION}\n" >>  CHANGELOG.md
+npm run changelog
 
 # tag commit
 git add CHANGELOG.md package.json
