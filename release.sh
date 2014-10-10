@@ -61,12 +61,8 @@ updateVersionToRelease() {
 }
 
 prepare() {
-	local umode="-unormal"
-	if [[ -n "$(git status --porcelain --ignore-submodules ${umode})" ]]; then
-		echo "dirty"
-	else 
-		echo "not"
-	fi
+	gitDirty
+	echo "pass through"
 	exit
 	local PACKAGE="package.json"
 	local SNAPSHOT="-beta"

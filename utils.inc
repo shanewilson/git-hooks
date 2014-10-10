@@ -29,7 +29,7 @@ echo_success() {
 
 echo_failure() {
   printf "\\033[${COL}G %s\n" ${FAIL}
-  printf $1
+  printf "%s %s" ${ERR} "$1"
   exit 1
 }
 
@@ -58,12 +58,11 @@ replaceJsonProp() {
 }
 
 # fastest possible way to check if repo is dirty
-git_dirty() {
-	# check if we're in a git repo
-	command git rev-parse --is-inside-work-tree &>/dev/null || return
-	# check if it's dirty
-	local umode="-uno" || local umode="-unormal"
-	command test -n "$(git status --porcelain --ignore-submodules ${umode})"
-
-	(($? == 0)) && echo '*'
+gitDirty() {
+	printf "Checking that there are no uncommited items..."
+	if [[ -n "$(git status --porcelain --ignore-submodules -unormal)" ]]; then
+		echo_failure "git is dirty! Please commit or stash your changes."
+	else 
+		echo_success
+	fi
 }
