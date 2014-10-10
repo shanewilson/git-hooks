@@ -61,7 +61,8 @@ updateVersionToRelease() {
 }
 
 prepare() {
-	if [[ gitDirty ]]; then
+	local umode="-unormal"
+	if [[ -n "$(git status --porcelain --ignore-submodules ${umode})" ]]; then
 		echo "dirty"
 	else 
 		echo "not"
