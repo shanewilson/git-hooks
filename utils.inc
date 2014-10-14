@@ -17,7 +17,6 @@ UNDERLINE=$(tput smul)
 COL=60
 OK=${GREEN}OK${NORMAL}
 FAIL=${RED}FAIL${NORMAL}
-ERR=${RED}!${NORMAL}
 
 focus() {
   echo "${WHITE}$1${NORMAL}"
@@ -29,7 +28,7 @@ echo_success() {
 
 echo_failure() {
   printf "\\033[${COL}G %s\n" ${FAIL}
-  printf "%s %s" ${ERR} "$1"
+  printf "%s %s" "${RED}!${NORMAL}" "$1"
   exit 1
 }
 
@@ -55,14 +54,4 @@ replaceInFile() {
 #   capturing group! -> all other groups start at index 2!
 replaceJsonProp() {
   replaceInFile $1 '"('$2')"[ ]*:[ ]*"'$3'"' '"\1": "'$4'"'
-}
-
-# fastest possible way to check if repo is dirty
-gitDirty() {
-	printf "Checking that there are no uncommited items..."
-	if [[ -n "$(git status --porcelain --ignore-submodules -unormal)" ]]; then
-		echo_failure "git is dirty! Please commit or stash your changes."
-	else 
-		echo_success
-	fi
 }
