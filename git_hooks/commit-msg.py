@@ -6,7 +6,7 @@ Git commit hook:
  Check commit message according to angularjs guidelines:
   * https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
 """
-
+print "here"
 import sys
 import re
 

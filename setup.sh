@@ -30,7 +30,7 @@ linkHooks() {
   local TARGET_FILE=$(basename ${SRC_FILE} .py)
   local TARGET=${TARGET_DIR}${TARGET_FILE}
 
-  printf "Setting up %s git hook..." $(focus ${TARGET_FILE})
+  printf "Setting up $(focus ${TARGET_FILE}) git hook..."
   ln -s ${SRC_DIR}${SRC_FILE} ${TARGET}
   if [[ ! -L ${TARGET} ]]; then
     echo_failure "An error occurred while trying to link $(focus ${TARGET_FILE})."
