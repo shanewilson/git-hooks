@@ -6,7 +6,7 @@ source $(dirname $0)/utils.inc
 
 readonly PACKAGE="package.json"
 
-readonly VERSION_REGEX="^[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?$"
+readonly VERSION_REGEX="^[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?(\-[A-Za-z]+)?$"
 readonly ACTION_REGEX="^(prepare|publish|next|retract)$"
 readonly COMMIT_SHA_REGEX="(.*)"
 readonly ARG_DEFS=(
@@ -107,8 +107,9 @@ publish() {
 	# tag commit
 	git add CHANGELOG.md package.json
 	git commit -m "chore(release): Release ${VERSION}"
-	git tag -s ${VERSION} -m "chore(release): $VERSION" "$COMMIT_SHA"
+	git tag -s ${VERSION} -m "chore(release): ${VERSION}" "$COMMIT_SHA"
 	git push origin ${VERSION}
+	git push origin master
 }
 
 next() {
@@ -117,6 +118,7 @@ next() {
 	# commit new version to master
 	git add package.json
 	git commit -m "chore(release): Start Development on ${VERSION}"
+	git push origin master
 }
 
 retract() {
