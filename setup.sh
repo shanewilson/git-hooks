@@ -2,9 +2,9 @@
 
 set -efu -o pipefail
 
-source $(dirname $0)/utils.inc
+source $(dirname $0)/scripts/utils.inc
 
-readonly SRC_DIR=git_hooks/
+readonly SRC_DIR=scripts/git_hooks/
 readonly TARGET_DIR=.git/hooks/
 
 preExistCheck() {
