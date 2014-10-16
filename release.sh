@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -o errexit
-set -o pipefail
+set -ef -o pipefail
 
 source $(dirname $0)/utils.inc
 
@@ -38,26 +37,24 @@ while [[ $# > 1 ]]; do
 	esac
 done
 
-
-
 if [[ -z ${VERSION} || ! ${VERSION} =~ ${VERSION_REGEX} ||
 	  (! -z ${ACTION} && ! ${ACTION} =~ ${ACTION_REGEX}) ||
 	  (! -z ${COMMIT_SHA} && ! ${COMMIT_SHA} =~ ${COMMIT_SHA_REGEX}) ]]; then
 	usage
 fi
 
-set -o nounset
+set -u
 
 readonly VERSION
 readonly ACTION=${ACTION:-"prepare"}
 readonly COMMIT_SHA=${COMMIT_SHA:-"HEAD"}
 
 compareVersions() {
-	local FROM=$1
+	local FROM=${1//"-beta"/}
 	local TO=$2
 	
-	printf "Checking that %s is greater than %s..." $(focus ${FROM}) $(focus ${TO})
-	if [[ ${TO} -gt ${FROM} ]]; then
+	printf "Checking that %s is greater than %s..." $(focus ${TO}) $(focus ${1})
+	if [[ ${TO} > ${FROM} || ${TO} == ${FROM} ]]; then
 		echo_success
 	else
 		echo_failure "The next version must be greater than the current version."
@@ -94,7 +91,7 @@ preChecks() {
 	fi
 	echo_success
 
-	local CURRENT_VERSION=$(($(readJsonProp ${PACKAGE} "version")+0))
+	local CURRENT_VERSION=$(readJsonProp ${PACKAGE} "version")
 
 	updateVersion ${CURRENT_VERSION} ${VERSION}
 }
@@ -126,11 +123,11 @@ next() {
 retract() {
 	printf "This will remove %s and %s copies of %s\n" $(focus "local") $(focus "remote") $(focus ${VERSION})
 	printf "If you wish to continue re-enter the tag name: "
-	local IFS= read -r TAG
+	read TAG
 	
-	if [[ ${TAG} -eq ${VERSION} ]]; then
+	if [[ ${TAG} == ${VERSION} ]]; then
 		git tag -d ${VERSION}
-		git push origin :refs/tags/${VERSION}	
+		git push origin :refs/tags/${VERSION}
 	fi
 }
 
