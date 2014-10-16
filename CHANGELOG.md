@@ -1,3 +1,18 @@
+## 1.5.0 (2014-10-16)
+
+
+#### Bug Fixes
+
+more stuff
+
+* **hooks:** fix py validate ([93c5df1f](https://github.com/shanewilson/git-hooks//commit/93c5df1fb817b5e5d865d778fc7147d8e3e3b24b))
+
+
+#### Features
+
+* **setup:** adds setup file ([6b941acf](https://github.com/shanewilson/git-hooks//commit/6b941acf284bbc61349eb07f90cbad837e9c5583))
+
+
 ### 1.4.9 (2014-10-16)
 
 
