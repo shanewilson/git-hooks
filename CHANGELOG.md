@@ -1,3 +1,16 @@
+### 1.5.1 (2014-10-16)
+
+
+#### Bug Fixes
+
+* **release:** missed path change ([23233864](https://github.com/shanewilson/git-hooks//commit/232338644e5672ad285c04cbd5d63d4e851da63a))
+
+
+#### Features
+
+* **dirs:** moves files around ([1f7a2a30](https://github.com/shanewilson/git-hooks//commit/1f7a2a30cc486f37886f588ff65835e705278350))
+
+
 ## 1.5.0 (2014-10-16)
 
 
