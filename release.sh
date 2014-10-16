@@ -2,7 +2,7 @@
 
 set -ef -o pipefail
 
-source $(dirname $0)/utils.inc
+source $(dirname $0)/scripts/utils.inc
 
 readonly PACKAGE="package.json"
 
