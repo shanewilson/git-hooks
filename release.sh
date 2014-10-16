@@ -101,15 +101,14 @@ prepare() {
 
 	# updates changelog
 	logs
-	
-	# tag commit
-	git add CHANGELOG.md package.json
-	git commit -m "chore(release): Release ${VERSION}"
-	git tag -s ${VERSION} -m "chore(release): $VERSION" "$COMMIT_SHA" 	
 }
 
 publish() {
-	git push origin $VERSION
+	# tag commit
+	git add CHANGELOG.md package.json
+	git commit -m "chore(release): Release ${VERSION}"
+	git tag -s ${VERSION} -m "chore(release): $VERSION" "$COMMIT_SHA"
+	git push origin ${VERSION}
 }
 
 next() {
