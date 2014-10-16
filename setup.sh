@@ -33,6 +33,7 @@ linkHooks() {
 
   printf "Setting up $(focus ${TARGET_FILE}) git hook..."
   echo "#!/bin/sh" >> ${TARGET}
+  
   echo "exec < /dev/tty" >> ${TARGET}
   echo "${SRC} \$1" >> ${TARGET}
 
