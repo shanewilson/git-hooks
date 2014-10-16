@@ -28,7 +28,8 @@ echo_success() {
 
 echo_failure() {
   printf "\\033[${COL}G %s\n" ${FAIL}
-  printf "%s %s" "${RED}!${NORMAL}" "$1"
+  printf "${RED}!${NORMAL} "
+  printf "$1"
   exit 1
 }
 
