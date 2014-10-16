@@ -27,12 +27,17 @@ preExistCheck() {
 
 linkHooks() {
   local SRC_FILE=${1}
+  local SRC=${SRC_DIR}${SRC_FILE}
   local TARGET_FILE=$(basename ${SRC_FILE} .py)
   local TARGET=${TARGET_DIR}${TARGET_FILE}
 
   printf "Setting up $(focus ${TARGET_FILE}) git hook..."
-  ln -s ${SRC_DIR}${SRC_FILE} ${TARGET}
-  if [[ ! -L ${TARGET} ]]; then
+  echo "#!/bin/sh" >> ${TARGET}
+  echo "exec < /dev/tty" >> ${TARGET}
+  echo "${SRC} \$1" >> ${TARGET}
+
+  # ln -s -f ../../${SRC_DIR}${SRC_FILE} ${TARGET}
+  if [[ ! -e ${TARGET} ]]; then
     echo_failure "An error occurred while trying to link $(focus ${TARGET_FILE})."
   fi
   echo_success
