@@ -33,7 +33,6 @@ linkHooks() {
 
   printf "Setting up $(focus ${TARGET_FILE}) git hook..."
   echo "#!/bin/sh" >> ${TARGET}
-  
   echo "exec < /dev/tty" >> ${TARGET}
   echo "${SRC} \$1" >> ${TARGET}
 
@@ -44,41 +43,36 @@ linkHooks() {
   echo_success
 }
 
-# makeExec() {
-#   if [ -e ${TARGET} ]; then
-#     echo_success
-#     printf "Making %s executable..." $(focus ${TARGET_FILE})
-#     chmod 755 ${TARGET}
-#     echo_success
-#   else
-#     echo_failure "An error occurred while trying to create %s." $(focus ${TARGET_FILE})
-#   fi
+makeExec() {
+  local SRC_FILE=${1}
+  local SRC=${SRC_DIR}${SRC_FILE}
+  local TARGET_FILE=$(basename ${SRC_FILE} .py)
+  local TARGET=${TARGET_DIR}${TARGET_FILE}
 
-#   printf "Making %s executable..." $(focus ${SRC_FILE})
-#   if [ -e ${SRC} ]; then
-#     chmod 755 ${TARGET}
-#     echo_success
-#   else
-#     echo_failure "%s has been moved or deleted" $(focus ${SRC})
-#   fi  
-# }
+  printf "Making $(focus ${SRC_FILE}) executable..."
+  chmod 755 ${SRC}
+  echo_success  
 
-# installDeps() {
-#   printf "Confirming %s is installed..." $(focus "Node")
-#   if hash npm 2>/dev/null; then
-#     echo_success
-#     printf "Installing %s dependencies...\n" $(focus "NPM")
-#     npm install
-#   else
-#     echo_failure "%s must be installed" $(focus"Node")
-#   fi
-# }
+  printf "Making $(focus ${TARGET_FILE}) executable..."
+  chmod 755 ${TARGET}
+  echo_success
+}
 
-for file in $(ls git_hooks/); do
+installDeps() {
+  printf "Confirming %s is installed..." $(focus "Node")
+  if ! hash npm 2>/dev/null; then
+    echo_failure "$(focus "Node") must be installed"  
+  fi
+  echo_success
+  printf "Installing %s dependencies...\n" $(focus "NPM")
+  npm install
+}
+
+for file in $(ls ${SRC_DIR}); do
   preExistCheck ${file}
   linkHooks ${file}
-  # makeExec ${file}
-  # installDeps ${file}
+  makeExec ${file}
+  installDeps ${file}
 done
 
 printf "${GREEN}Setup Successful!${NORMAL}"
