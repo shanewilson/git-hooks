@@ -81,7 +81,7 @@ while True:
                 commit_fd.write('#! %s\n' % (error,))
 
     if errors:
-        re_edit = input('Invalid git commit message format.  Press y to edit and n to cancel the commit. [Y/n]: ')
+        re_edit = raw_input('Invalid git commit message format.  Press y to edit and n to cancel the commit. [Y/n]: ')
         if re_edit.lower() in ('n','no'):
             sys.exit(1)
         call('%s %s' % (editor, message_file), shell=True)
